@@ -27,6 +27,10 @@ public class InputManager : MonoBehaviour
     public float timeForSpeedRunning;
     public float timeReloadSpeed;
 
+    [Header("Purchaches")]
+    public UIButtonInfo buyButtonInfo;
+    public Button buyButton;
+
     private void OnValidate()
     {
         SwitchInput(isJoystick);
@@ -47,23 +51,21 @@ public class InputManager : MonoBehaviour
     }
 
 
-    //Общий метод смены управления
     public void SwitchInput(bool isJoystick)
     {
         Joysticks.SetActive(isJoystick);
         Cursor.lockState = (isJoystick) ? CursorLockMode.None : CursorLockMode.Locked;
         sensivity = SetMouseSensivity(isJoystick);
         buttonChangeSpeed.SetActive(isJoystick);
+        buyButton.gameObject.SetActive(isJoystick);
     }
 
-    //изменение чувствительности мыши
     float SetMouseSensivity(bool isJoystick)
     {
         float sensivity = (isJoystick) ? sensivityJoystick : mouseSensivity;
         return sensivity;
     }
 
-    //передача управления телефон/комп для движения
     public float[] ValueMoving()
     {
         var arr = new float[2];
@@ -75,7 +77,6 @@ public class InputManager : MonoBehaviour
         return arr;
     }
 
-    //передача управления телефон/комп для управления камерой
     public float[] ValueLooking()
     {
         var arr = new float[2];
@@ -87,13 +88,11 @@ public class InputManager : MonoBehaviour
         return arr;
     }
 
-    //смена скорости на кнопку на телефоне или R
     public bool IsChangeSpeed()
     {
         return (isJoystick) ? isCanSpeedMoving : Input.GetKeyDown(KeyCode.R);
     }
 
-    //нажатие клавиши
     public void StartChangeSpeed()
     {
         isCanSpeedMoving = true;
@@ -102,10 +101,15 @@ public class InputManager : MonoBehaviour
         StartCoroutine(CoroutineChangeSpeed(timeReloadSpeed));
     }
 
-    //корутина, запрещающая нажатие кнопки по таймеру
+
     IEnumerator CoroutineChangeSpeed(float t)
     {
         yield return new WaitForSeconds(t);
         buttonSpeed.interactable = true;
+    }
+
+    public void ActiveBuyButton(bool isActive)
+    {
+        buyButton.gameObject.SetActive(isActive);
     }
 }

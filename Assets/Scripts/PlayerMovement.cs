@@ -67,11 +67,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             MovingFOV(minFov);
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            changeWeaponsManager.ChangeWeapon(1);
-        }      
+        }     
        // speedParticles.transform.position = transform.position;
     }
 

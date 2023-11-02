@@ -84,8 +84,7 @@ public class WeaponManager : MonoBehaviour
     void Shoot()
     {
         isCanShoot = false;
-
-
+        
         ammo--;
         ammoShot++;
         textAmmo.text = ammo.ToString();

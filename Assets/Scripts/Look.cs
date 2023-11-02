@@ -24,9 +24,13 @@ public class Look : MonoBehaviour
     internal bool isAiming;
     Vector3 curEuler = Vector3.zero;
 
+    ShopContainer shopContainer;
+    ChangeWeaponsManager changeWeaponsManager;
+
     private void Awake()
     {
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
+        changeWeaponsManager = GameObject.Find("WeaponsManager").GetComponent<ChangeWeaponsManager>();
     }
 
     // Update is called once per frame
@@ -41,10 +45,22 @@ public class Look : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.black);
         Ray ray = new(transform.position, transform.forward);
 
-        if(Physics.Raycast(ray,out RaycastHit target,30, layerShop))
+        if (Physics.Raycast(ray, out RaycastHit target, 5, layerShop))
         {
             target.transform.GetChild(0).Rotate(0, (transform.rotation.y + 10) * Time.deltaTime * 10, 0);
+            //if (Input.GetKeyDown(KeyCode.G)){
+            //}
+            if (inputManager.isJoystick)
+            {
+                inputManager.ActiveBuyButton(true);
+            }
+            if (Input.GetKeyDown(KeyCode.G) || inputManager.buyButtonInfo.isDown)
+            {
+                int id = target.transform.GetComponent<ShopContainer>().id;
+                changeWeaponsManager.ChangeWeapon(id);
+            }
         }
+        else inputManager.ActiveBuyButton(false);
 
         if (Physics.SphereCast(ray, radiusTarget, out RaycastHit enemy, 75, layerEnemy))
         {
@@ -53,7 +69,7 @@ public class Look : MonoBehaviour
             Quaternion lookAt = Quaternion.RotateTowards(playerBody.transform.rotation, targetRotation, Time.deltaTime * speedAssist);
             playerBody.rotation = lookAt;
             Debug.DrawLine(transform.position, enemy.point);
-            isAiming = true;
+            isAiming = true;;
         }
         else
         {
