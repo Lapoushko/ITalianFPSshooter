@@ -56,13 +56,13 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject,0.01f);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        collisions++;
-        if (collision.collider.CompareTag("Ground"))
-        {
-            Debug.Log("WOW");
-        }
-        Invoke("DestroyBullet", 0f);
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    collisions++;
+    //    if (collision.collider.CompareTag("Ground"))
+    //    {
+    //        Debug.Log("WOW");
+    //    }
+    //    Invoke("DestroyBullet", 0f);
+    //}
 }

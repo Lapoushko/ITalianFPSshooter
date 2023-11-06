@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using EZCameraShake;
 public class WeaponManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    
     public Transform attackPoint;
     [SerializeField] GameObject bullet;
     [SerializeField] ParticleSystem muzzleFlash;
@@ -22,33 +19,37 @@ public class WeaponManager : MonoBehaviour
 
     bool shooting, reloading, isCanShoot;
     public bool allowInvoke = true;
-    
 
     [Header("UI")]
     [SerializeField] private TMP_Text textAmmo;
     [SerializeField] private Image reloadImage;
     Camera cam;
-    [SerializeField] LayerMask layerMask;
+    public LayerMask layerMask;
 
+    [Header("Managers")]
     Look look;
     InputManager inputManager;
 
+    [Space]
+    [Header("Camera Shaker")]
+    [SerializeField] float magnitude;
+    [SerializeField] float roughness;
+    [SerializeField] float fadeInTime;
+    [SerializeField] float fadeOutTime;
     private void Awake()
     {
-        inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
+        inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();;
         ammo = maxAmmo;
         isCanShoot = true;
 
         cam = Camera.main;
         textAmmo.text = ammo.ToString();
         look = cam.GetComponent<Look>();
-        //anim = GetComponent<Animator>();
     }
     void Update()
     {
         MyInput();
-        //anim.SetBool("Shooting", shooting);
-        Debug.DrawRay(attackPoint.transform.position, transform.forward, Color.red);
+        //Debug.DrawRay(attackPoint.transform.position, transform.forward, Color.red);
     }
 
     void MyInput()
@@ -65,17 +66,18 @@ public class WeaponManager : MonoBehaviour
             if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
             else shooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
-        
 
-        if(isCanShoot && shooting && !reloading && ammo > 0)
+
+        if (isCanShoot && shooting && !reloading && ammo > 0)
         {
-            Shoot(); 
+            ammoShot = 0;
+            Shoot();
         }
 
         if ((isCanShoot && shooting && !reloading && ammo <= 0) ||
             (!shooting && !reloading && ammo <= 0))
-        {           
-            Reloading();           
+        {
+            Reloading();
         }
     }
 
@@ -83,17 +85,19 @@ public class WeaponManager : MonoBehaviour
 
     void Shoot()
     {
-        isCanShoot = false;
-        
         ammo--;
         ammoShot++;
         textAmmo.text = ammo.ToString();
 
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
+        isCanShoot = false;
+        //StartCoroutine(cameraShake.Shake(.05f, .05f));
+
+        CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeInTime, fadeOutTime);
+        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         Vector3 targetPoint;
 
-        if (Physics.Raycast(ray,out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
             targetPoint = hit.point;
         }

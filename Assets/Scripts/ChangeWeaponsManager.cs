@@ -17,6 +17,7 @@ public class ChangeWeaponsManager : MonoBehaviour
 
     private void Start()
     {
+        weapons[0].SetActive(true);
         for(int i = 0; i < weapons.Length; i++)
         {
             if (weapons[i].activeInHierarchy)

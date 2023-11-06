@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxFov;
     [SerializeField] float minFov;
     [SerializeField] float speedzooom;
+    [SerializeField] float avgFov;
 
     [Header("Movement Player")]
     public float minSpeedX;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     bool isGrounded;
+    bool isMoving;
 
     InputManager inputManager;
     ChangeWeaponsManager changeWeaponsManager;
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            MovingFOV(minFov);
+            if (isMoving) MovingFOV(avgFov); else MovingFOV(minFov);
         }     
        // speedParticles.transform.position = transform.position;
     }
@@ -91,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         float x = inputManager.ValueMoving()[0];
         float z = inputManager.ValueMoving()[1];
 
+        isMoving = (x != 0f || z != 0f) ? true : false;
 
         Vector3 move = transform.right * x + transform.forward * z;
 
