@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using EZCameraShake;
 public class WeaponManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -91,8 +90,6 @@ public class WeaponManager : MonoBehaviour
 
         isCanShoot = false;
         //StartCoroutine(cameraShake.Shake(.05f, .05f));
-
-        CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeInTime, fadeOutTime);
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         Vector3 targetPoint;
