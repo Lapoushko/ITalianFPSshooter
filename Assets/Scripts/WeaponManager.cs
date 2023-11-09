@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class WeaponManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class WeaponManager : MonoBehaviour
     [Header("Managers")]
     Look look;
     InputManager inputManager;
-
+    CameraShaking camShaking;
     [Space]
     [Header("Camera Shaker")]
     [SerializeField] float magnitude;
@@ -44,6 +45,7 @@ public class WeaponManager : MonoBehaviour
         cam = Camera.main;
         textAmmo.text = ammo.ToString();
         look = cam.GetComponent<Look>();
+        camShaking = cam.GetComponent<CameraShaking>();
     }
     void Update()
     {
@@ -87,7 +89,7 @@ public class WeaponManager : MonoBehaviour
         ammo--;
         ammoShot++;
         textAmmo.text = ammo.ToString();
-
+        camShaking.Shake();
         isCanShoot = false;
         //StartCoroutine(cameraShake.Shake(.05f, .05f));
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -118,6 +120,9 @@ public class WeaponManager : MonoBehaviour
 
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(cam.transform.up * upwardForce, ForceMode.Impulse);
+
+        //transform.DOMoveZ(transform.position.z - 0.2f, timeBetweenShooting).SetEase(Ease.InOutSine).SetLoops(2, LoopType.Yoyo);
+        gameObject.transform.DOShakePosition(timeBetweenShooting, 0.05f, 10, 90f, false, true, ShakeRandomnessMode.Harmonic).SetEase(Ease.InOutBounce);
 
         if (allowInvoke)
         {

@@ -30,6 +30,7 @@ public class Look : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 120;
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
         changeWeaponsManager = GameObject.Find("WeaponsManager").GetComponent<ChangeWeaponsManager>();
     }
