@@ -30,6 +30,8 @@ public class WeaponManager : MonoBehaviour
     Look look;
     InputManager inputManager;
     CameraShaking camShaking;
+    ContainerKit containerKit;
+
     [Space]
     [Header("Camera Shaker")]
     [SerializeField] float magnitude;
@@ -46,6 +48,15 @@ public class WeaponManager : MonoBehaviour
         textAmmo.text = ammo.ToString();
         look = cam.GetComponent<Look>();
         camShaking = cam.GetComponent<CameraShaking>();
+        containerKit = gameObject.GetComponent<ContainerKit>();
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < containerKit.kits.Length; i++)
+        {
+            containerKit.kits[i].active = false;
+        }
     }
     void Update()
     {

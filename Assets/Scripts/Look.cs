@@ -32,7 +32,7 @@ public class Look : MonoBehaviour
     {
         Application.targetFrameRate = 120;
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
-        changeWeaponsManager = GameObject.Find("WeaponsManager").GetComponent<ChangeWeaponsManager>();
+        changeWeaponsManager = GameObject.Find("ShopManagerWeaponAndKit").GetComponent<ChangeWeaponsManager>();
     }
 
     // Update is called once per frame
@@ -57,36 +57,11 @@ public class Look : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.G) || inputManager.buyButtonInfo.isDown)
             {
-                int id = target.transform.GetComponent<ShopContainer>().id;
-                changeWeaponsManager.ChangeWeapon(id);
+                int id = target.transform.GetComponent<ShopContainer>().Id;
+                changeWeaponsManager.ValidateId(id);
             }
         }
         else inputManager.ActiveBuyButton(false);
-
-        //if (Physics.SphereCast(ray, radiusTarget, out RaycastHit enemy, 75, layerEnemy))
-        //{
-        //    //Vector3 direction = enemy.transform.position - transform.position;
-        //    //Quaternion targetRotation = Quaternion.LookRotation(direction);
-        //    //Quaternion lookAt = Quaternion.RotateTowards(playerBody.transform.rotation, targetRotation, Time.deltaTime * speedAssist);
-        //    //playerBody.rotation = lookAt;
-        //    //Debug.DrawLine(transform.position, enemy.point);
-        //    isAiming = true;;
-        //}
-        //else
-        //{
-        //    mouseX = inputManager.ValueLooking()[0] * mouseSensivity * Time.deltaTime;
-        //    mouseY = inputManager.ValueLooking()[1] * mouseSensivity * Time.deltaTime;
-        //    xRotation -= mouseY;
-        //    transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //    xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        //    playerBody.Rotate(Vector3.up * mouseX);
-        //    isAiming = false;
-        //}
-        //if (!isAiming)
-        //{
-        //    curEuler.z = 0f;
-        //    playerBody.localEulerAngles = new Vector3(playerBody.localEulerAngles.x,playerBody.localEulerAngles.y,curEuler.z);
-        //}
 
         if (Physics.SphereCast(ray, radiusTarget, out RaycastHit enemy, 75, layerEnemy))
         {
@@ -103,11 +78,5 @@ public class Look : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         playerBody.Rotate(Vector3.up * mouseX);
-
-        //if (!isAiming)
-        //{
-        //    curEuler.z = 0f;
-        //    playerBody.localEulerAngles = new Vector3(playerBody.localEulerAngles.x, playerBody.localEulerAngles.y, curEuler.z);
-        //}
     }
 }

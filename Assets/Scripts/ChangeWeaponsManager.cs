@@ -8,8 +8,8 @@ public class ChangeWeaponsManager : MonoBehaviour
     [SerializeField] GameObject weaponArrayInspector;
     public int curWeaponId;
     public int nextWeaponId;
-    public void ChangeWeapon(int id)
-    {        
+    private void BuyWeapon(int id)
+    {   
         weapons[curWeaponId].SetActive(false);
         weapons[id].SetActive(true);
         curWeaponId = id;
@@ -26,5 +26,25 @@ public class ChangeWeaponsManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ValidateId(int id)
+    {
+        if (id < 10)
+        {
+            BuyWeapon(id);
+        }
+        else if(id > 9 && id < 100)
+        {
+            if (id > 9 && id < 20)
+            {
+
+            }
+        }
+    }
+
+    private void SetKit(int id)
+    {
+        Debug.Log("KIT");
     }
 }

@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopManager : MonoBehaviour
+public class IdObject : MonoBehaviour
 {
-    void Buy()
-    {
-
-    }
-    
+    public int Id;
 }

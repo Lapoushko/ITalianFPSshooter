@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ShopContainer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public int id;
+    /// <summary>
+    /// Id обвеса или оружия
+    /// </summary>
+    public int Id;
+
 }
