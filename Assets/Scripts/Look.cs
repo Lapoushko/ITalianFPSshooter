@@ -48,6 +48,7 @@ public class Look : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.black);
         Ray ray = new(transform.position, transform.forward);
 
+        //Куда направлен взгляд игрока
         if (Physics.Raycast(ray, out RaycastHit target, 5, layerShop))
         {
             target.transform.GetChild(0).Rotate(0, (transform.rotation.y + 10) * Time.deltaTime * 10, 0);
@@ -58,7 +59,9 @@ public class Look : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.G) || inputManager.buyButtonInfo.isDown)
             {
                 int id = target.transform.GetComponent<ShopContainer>().Id;
-                changeWeaponsManager.ValidateId(id);
+                string type = target.transform.GetComponent<ShopContainer>().Type;
+                int idContainer = target.transform.GetComponent<ShopContainer>().IdContainer;
+                changeWeaponsManager.DistributionWeaponByIdAndType(id,type, idContainer);
             }
         }
         else inputManager.ActiveBuyButton(false);

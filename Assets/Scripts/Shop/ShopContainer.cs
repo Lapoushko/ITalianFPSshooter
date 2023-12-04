@@ -9,4 +9,13 @@ public class ShopContainer : MonoBehaviour
     /// </summary>
     public int Id;
 
+    /// <summary>
+    /// Type обвеса (weapon or kit)
+    /// </summary>
+    public string Type;
+    /// <summary>
+    /// id контейнера
+    /// </summary>
+    public int IdContainer;
+    public bool IsCanBuy = true;
 }

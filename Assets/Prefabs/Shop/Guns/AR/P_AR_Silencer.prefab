@@ -120,4 +120,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b98a8cfaa6c4c4f96be0c734edd369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 11
+  Id: 0
+  Type: kit_AR

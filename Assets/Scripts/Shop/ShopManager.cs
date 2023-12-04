@@ -1,12 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject[] cubs;
+    /// <summary>
+    /// Имя для currensyList
+    /// </summary>
+    [SerializeField] private string nameList;
+    /// <summary>
+    /// Все слоты для предметов покупки
+    /// </summary>
+    public GameObject[] containers;
     /// <summary>
     /// Список обвесов для shotgun
     /// </summary>
@@ -24,47 +32,69 @@ public class ShopManager : MonoBehaviour
     /// </summary>
     [Header("SMG")]
     [SerializeField] private List<GameObject> smgList;
+
+    /// <summary>
+    /// Случайное заполнение контейнеров с приоритетом выбранного оружия
+    /// </summary>
     private void Start()
     {
         //Dict, который содержит все списки обвесов
         Dictionary<string, List<GameObject>> allListMap =
             new Dictionary<string, List<GameObject>>
             {
-                //Добавляю по именам списки
+                //Добавляю по именам(ключ) списки
                 { "shotgun", shotgunList },
                 { "ar", arList },
                 { "smg", smgList }
             };
-
-        string name = "smg";
-        List<GameObject> currencyList = allListMap[name];
+        //приоритетное оружие
+        List<GameObject> currencyList = allListMap[nameList];
        
-        //В кубах создаёт обвес с приоритетом
-        for(int i = 0; i < cubs.Length; i++)
+        //В кубах создаёт обвес (с приоритетом выбранного оружия)
+        for(int i = 0; i < containers.Length; i++)
         {
             if (currencyList.Count == 0)
             {
-                allListMap.Remove(name);
-                currencyList = allListMap[getNameList(
+                allListMap.Remove(nameList);
+                currencyList = allListMap[GetNameList(
                     allListMap, new Random().Next(0, allListMap.Count) )];
             }
             //Появляется случайный обвес или оружие для магазина(Приоритет для выбранного оружия)
             Random random = new Random();
             int number = random.Next(0, currencyList.Count);
-            GameObject kit = Instantiate(currencyList[number], cubs[i].transform);
-            cubs[i].GetComponent<ShopContainer>().Id = currencyList[number].GetComponent<IdObject>().Id;
+            Instantiate(currencyList[number], containers[i].transform);
+
+            containers[i].GetComponent<ShopContainer>().Id = currencyList[number].GetComponent<IdObject>().Id;
+            containers[i].GetComponent<ShopContainer>().Type = currencyList[number].GetComponent<IdObject>().Type;
+            containers[i].GetComponent<ShopContainer>().IdContainer = i;
             currencyList.Remove(currencyList[number]);
         }
     }
+
     /// <summary>
     /// Геттер случайного имени для ключа allListMap
     /// </summary>
     /// <param name="allListMap">Dict всех списков</param>
     /// <param name="id">Случайный id списка</param>
     /// <returns>Имя списка</returns>
-    private string getNameList(Dictionary<string, List<GameObject>> allListMap, int id)
+    private string GetNameList(Dictionary<string, List<GameObject>> allListMap, int id)
     {
         List<string> strings = new List<string>(allListMap.Keys);
         return strings[id];
+    }
+    /// <summary>
+    /// Отключить дочерний объект после покупки
+    /// </summary>
+    /// <param name="id">id контейнера, в котором содержится </param>
+
+    public void OffObjectInContainer(int id)
+    {
+        containers[id].transform.GetChild(0).gameObject.SetActive(false);
+        containers[id].GetComponent<ShopContainer>().IsCanBuy = false;
+    }
+
+    public bool GetCanBuy(int id)
+    {
+        return containers[id].GetComponent<ShopContainer>().IsCanBuy;
     }
 }
