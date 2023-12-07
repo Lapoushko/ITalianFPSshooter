@@ -70,8 +70,13 @@ public class InputManager : MonoBehaviour
     {
         var arr = new float[2];
 
-        float x = (isJoystick) ? JoystickMoving.Horizontal : Input.GetAxis("Horizontal");
-        float z = (isJoystick) ? JoystickMoving.Vertical : Input.GetAxis("Vertical");
+        float x = (isJoystick) 
+            ? JoystickMoving.Horizontal 
+            : Input.GetAxis("Horizontal");
+
+        float z = (isJoystick) 
+            ? JoystickMoving.Vertical 
+            : Input.GetAxis("Vertical");
         arr[0] = x;
         arr[1] = z;
         return arr;
@@ -81,8 +86,14 @@ public class InputManager : MonoBehaviour
     {
         var arr = new float[2];
 
-        float x = (isJoystick) ? JoystickLooking.Horizontal : Input.GetAxis("Mouse X");
-        float z = (isJoystick) ? JoystickLooking.Vertical : Input.GetAxis("Mouse Y");
+        float x = (isJoystick) 
+            ? JoystickLooking.Horizontal 
+            : Input.GetAxis("Mouse X");
+
+        float z = (isJoystick) 
+            ? JoystickLooking.Vertical 
+            : Input.GetAxis("Mouse Y");
+
         arr[0] = x;
         arr[1] = z;
         return arr;

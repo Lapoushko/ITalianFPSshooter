@@ -8,7 +8,6 @@ public class ShopContainer : MonoBehaviour
     /// Id обвеса или оружия
     /// </summary>
     public int Id;
-
     /// <summary>
     /// Type обвеса (weapon or kit)
     /// </summary>

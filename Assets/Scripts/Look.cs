@@ -22,11 +22,8 @@ public class Look : MonoBehaviour
     InputManager inputManager;
 
     internal bool isAiming;
-    Vector3 curEuler = Vector3.zero;
 
-    ShopContainer shopContainer;
     ChangeWeaponsManager changeWeaponsManager;
-    Camera cam;
 
     private void Awake()
     {
@@ -52,16 +49,22 @@ public class Look : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit target, 5, layerShop))
         {
             target.transform.GetChild(0).Rotate(0, (transform.rotation.y + 10) * Time.deltaTime * 10, 0);
-            if (inputManager.isJoystick)
-            {
-                inputManager.ActiveBuyButton(true);
-            }
-            if (Input.GetKeyDown(KeyCode.G) || inputManager.buyButtonInfo.isDown)
-            {
-                int id = target.transform.GetComponent<ShopContainer>().Id;
-                string type = target.transform.GetComponent<ShopContainer>().Type;
-                int idContainer = target.transform.GetComponent<ShopContainer>().IdContainer;
-                changeWeaponsManager.DistributionWeaponByIdAndType(id,type, idContainer);
+            if (target.transform.TryGetComponent(out ShopContainer container))
+            { 
+                if (inputManager.isJoystick)
+                {
+                    if (container.IsCanBuy)
+                    {
+                        inputManager.ActiveBuyButton(true);
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.E) || inputManager.buyButtonInfo.isDown)
+                {
+                    int id = container.Id;
+                    string type = container.Type;
+                    int idContainer = container.IdContainer;
+                    changeWeaponsManager.DistributionWeaponByIdAndType(id, type, idContainer);
+                }
             }
         }
         else inputManager.ActiveBuyButton(false);
@@ -75,6 +78,7 @@ public class Look : MonoBehaviour
             isAiming = false;
             curMouseSensivity = mouseSensivity;
         }
+        
         mouseX = inputManager.ValueLooking()[0] * curMouseSensivity * Time.deltaTime;
         mouseY = inputManager.ValueLooking()[1] * curMouseSensivity * Time.deltaTime;
         xRotation -= mouseY;

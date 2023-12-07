@@ -571,10 +571,10 @@ MonoBehaviour:
   attackPoint: {fileID: 479583504908459261}
   bullet: {fileID: 4148928866873295401, guid: 4ba3ab72c53933d4399bee36fb44ed9c, type: 3}
   muzzleFlash: {fileID: 8702176325064159413}
-  shootForce: 150
+  shootForce: 50
   upwardForce: 0
   timeBetweenShooting: 1
-  spread: 4
+  spread: 3
   reloadTime: 1
   timeBetweenShots: 0
   maxAmmo: 30

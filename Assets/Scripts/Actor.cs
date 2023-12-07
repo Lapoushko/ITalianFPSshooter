@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    public int health { get; private set; }
-    public int maxHealth { get; private set; }
-    void Start()
+    public int health;
+    public int maxHealth;
+    public virtual void Awake()
     {
-        
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        health -= damage;
     }
 }

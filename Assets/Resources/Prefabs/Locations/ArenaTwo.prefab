@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2058051357778741061}
   m_Layer: 0
   m_Name: Enter1 (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 8973119828530460818}
   m_Layer: 0
   m_Name: Enter1 (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 1983780317620877652}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -1336,7 +1336,7 @@ GameObject:
   - component: {fileID: 457775198107438779}
   m_Layer: 0
   m_Name: Main
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3609,7 +3609,7 @@ GameObject:
   - component: {fileID: 1788555651683493958}
   m_Layer: 0
   m_Name: Lava
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3907,7 +3907,7 @@ GameObject:
   - component: {fileID: 682010099429545384}
   m_Layer: 0
   m_Name: Arena
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4260,7 +4260,7 @@ GameObject:
   - component: {fileID: 8428961001221405564}
   m_Layer: 0
   m_Name: Enter1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4613,7 +4613,7 @@ GameObject:
   - component: {fileID: 9167777044466658735}
   m_Layer: 0
   m_Name: Start
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4966,7 +4966,7 @@ GameObject:
   - component: {fileID: 6852909586235560977}
   m_Layer: 0
   m_Name: Enter2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

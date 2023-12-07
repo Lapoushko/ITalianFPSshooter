@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4148928866873295404}
   - component: {fileID: 4148928866873295403}
   - component: {fileID: 4148928866873295402}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -151,9 +151,9 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 0
-  Damage: 0
-  maxCollisions: 2
-  useGravity: 1
+  Damage: 10
+  maxCollisions: 0
+  useGravity: 0
   bouncyness: 0
   particleBullet: {fileID: 1668512780680829985}
 --- !u!1001 &6948093647820811844
@@ -268,6 +268,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletDestroy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8596010306880139877, guid: 8476ec23383d6a940b89f9069a60fdab,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8596010306880139877, guid: 8476ec23383d6a940b89f9069a60fdab,
         type: 3}

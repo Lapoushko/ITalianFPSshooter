@@ -47,22 +47,40 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       Destroy(gameObject,maxLifetime);
+        Destroy(gameObject,maxLifetime);
     }
 
     void DestroyBullet()
     {
         particleBullet.SetActive(true);
-        Destroy(gameObject,0.01f);
+        Destroy(gameObject,0);
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    collisions++;
-    //    if (collision.collider.CompareTag("Ground"))
-    //    {
-    //        Debug.Log("WOW");
-    //    }
-    //    Invoke("DestroyBullet", 0f);
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        collisions++;
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Enemy e = other.gameObject.GetComponent<Enemy>();
+            if (e != null)
+            {
+                e.TakeDamage(Damage);
+                Invoke("DestroyBullet", 0f);
+            }
+        }
+
+        else if (other.gameObject.CompareTag("Ground"))
+        {
+            Invoke("DestroyBullet", 0f);
+        }
+        else if (other.gameObject.CompareTag("Player"))
+        {
+            Player player = other.gameObject.GetComponent<Player>();
+            if(player != null)
+            {
+                player.TakeDamage(Damage);
+                Invoke("DestroyBullet", 0f);
+            }
+        }
+    }
 }
