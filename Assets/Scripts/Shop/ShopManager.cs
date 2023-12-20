@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 
+/// <summary>
+/// Заполнение магазина товарами со свойствами
+/// </summary>
 public class ShopManager : MonoBehaviour
 {
     /// <summary>
@@ -64,9 +67,14 @@ public class ShopManager : MonoBehaviour
             int number = random.Next(0, currencyList.Count);
             Instantiate(currencyList[number], containers[i].transform);
 
-            containers[i].GetComponent<ShopContainer>().Id = currencyList[number].GetComponent<IdObject>().Id;
-            containers[i].GetComponent<ShopContainer>().Type = currencyList[number].GetComponent<IdObject>().Type;
-            containers[i].GetComponent<ShopContainer>().IdContainer = i;
+            ShopContainer curShopContainer = containers[i].GetComponent<ShopContainer>();
+            IdObject idObject = currencyList[number].GetComponent<IdObject>();
+
+            curShopContainer.Id = idObject.Id;
+            curShopContainer.Type = idObject.Type;
+            curShopContainer.IdContainer = i;
+            curShopContainer.Price = idObject.Price;
+            curShopContainer.PriceText.text = curShopContainer.Price.ToString() + "$";
             currencyList.Remove(currencyList[number]);
         }
     }
@@ -91,6 +99,8 @@ public class ShopManager : MonoBehaviour
     {
         containers[id].transform.GetChild(0).gameObject.SetActive(false);
         containers[id].GetComponent<ShopContainer>().IsCanBuy = false;
+        containers[id].GetComponent<ShopContainer>().PriceText.text = "Куплено!";
+        containers[id].GetComponent<ShopContainer>().PriceText.color = Color.red;
     }
 
     public bool GetCanBuy(int id)

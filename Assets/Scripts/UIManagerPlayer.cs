@@ -19,6 +19,9 @@ public class UIManagerPlayer : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private float fadeSpeed;
 
+    [Header("Money")]
+    [SerializeField] private TMP_Text moneyText;
+
     public float durationTimer;
     void Awake()
     {
@@ -37,7 +40,7 @@ public class UIManagerPlayer : MonoBehaviour
         healthText.color = healthBarCur.color;
         healthBarCur.fillAmount = (float)player.health / (float)player.maxHealth;
         healthText.text = player.health.ToString();
-
+        moneyText.text = MoneyManager.instance.Money.ToString();
         UpdateEffects();
     }
 

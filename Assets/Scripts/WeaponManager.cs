@@ -55,7 +55,8 @@ public class WeaponManager : MonoBehaviour
     {
         for (int i = 0; i < containerKit.kits.Length; i++)
         {
-            containerKit.kits[i].active = false;
+            //
+            containerKit.kits[i].SetActive(false);
         }
     }
     void Update()

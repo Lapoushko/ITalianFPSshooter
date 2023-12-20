@@ -185,3 +185,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Type: weapon_AR
+  Price: 50

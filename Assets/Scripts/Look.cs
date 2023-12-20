@@ -24,12 +24,15 @@ public class Look : MonoBehaviour
     internal bool isAiming;
 
     ChangeWeaponsManager changeWeaponsManager;
+    LookTarget lookTarget;
+    private Vector3 velocity;
 
     private void Awake()
     {
         Application.targetFrameRate = 120;
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
         changeWeaponsManager = GameObject.Find("ShopManagerWeaponAndKit").GetComponent<ChangeWeaponsManager>();
+        lookTarget = GameObject.FindAnyObjectByType<LookTarget>();
     }
 
     // Update is called once per frame
@@ -63,7 +66,13 @@ public class Look : MonoBehaviour
                     int id = container.Id;
                     string type = container.Type;
                     int idContainer = container.IdContainer;
-                    changeWeaponsManager.DistributionWeaponByIdAndType(id, type, idContainer);
+                    int salary = container.Price;
+                    bool isCanBuy = container.IsCanBuy;
+                    changeWeaponsManager.DistributionWeaponByIdAndType(id,
+                        type,
+                        idContainer,
+                        salary,
+                        isCanBuy);
                 }
             }
         }
@@ -73,17 +82,14 @@ public class Look : MonoBehaviour
         {
             isAiming = true;
             curMouseSensivity = mouseSensivity / 2;
+            lookTarget.mouseSensivity = curMouseSensivity;
         }
         else { 
             isAiming = false;
             curMouseSensivity = mouseSensivity;
+            lookTarget.mouseSensivity = curMouseSensivity;
         }
-        
-        mouseX = inputManager.ValueLooking()[0] * curMouseSensivity * Time.deltaTime;
-        mouseY = inputManager.ValueLooking()[1] * curMouseSensivity * Time.deltaTime;
-        xRotation -= mouseY;
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        playerBody.Rotate(Vector3.up * mouseX);
+
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, lookTarget.transform.rotation, 0.125f);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopContainer : MonoBehaviour
@@ -17,4 +18,9 @@ public class ShopContainer : MonoBehaviour
     /// </summary>
     public int IdContainer;
     public bool IsCanBuy = true;
+    /// <summary>
+    /// Цена товара
+    /// </summary>
+    public int Price;
+    public TMP_Text PriceText;
 }

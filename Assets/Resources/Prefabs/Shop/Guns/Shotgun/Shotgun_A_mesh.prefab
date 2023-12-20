@@ -177,3 +177,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   Type: weapon_SHOTGUN
+  Price: 50

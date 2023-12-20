@@ -13,4 +13,8 @@ public class IdObject : MonoBehaviour
     /// Тип объекта
     /// </summary>
     public string Type;
+    /// <summary>
+    /// Цена объекта
+    /// </summary>
+    public int Price;
 }

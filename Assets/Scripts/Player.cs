@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : Actor
 {
     UIManagerPlayer UIManager;
+    [SerializeField] public int money;
+
 
     public override void Awake()
     {
@@ -17,6 +19,13 @@ public class Player : Actor
         if (Input.GetKeyDown(KeyCode.G))
         {
             TakeDamage(10);
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            MoneyManager.instance.AddMoney(100);
+        }
+        else if (Input.GetKeyDown(KeyCode.M)){
+            MoneyManager.instance.RemoveMoney(10);
         }
     }
 

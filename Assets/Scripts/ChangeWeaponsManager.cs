@@ -40,12 +40,13 @@ public class ChangeWeaponsManager : MonoBehaviour
     /// Покупка оружия
     /// </summary>
     /// <param name="id">id оружия</param>
-    private void BuyWeapon()
+    private void BuyWeapon(int salary)
     {   
         weapons[curWeaponId].SetActive(false);
         weapons[id].SetActive(true);
         curWeaponId = id;
         curWeaponType = type;
+        MoneyManager.instance.RemoveMoney(salary);
         shopManager.OffObjectInContainer(idContainer);
         Debug.Log("Оружие куплено!");
     }
@@ -56,18 +57,25 @@ public class ChangeWeaponsManager : MonoBehaviour
     /// </summary>
     /// <param name="id">id оружия</param>
     /// <param name="type">type оружия</param>
-    public void DistributionWeaponByIdAndType(int id, string type, int idContainer)
+    public void DistributionWeaponByIdAndType(int id,
+        string type,
+        int idContainer,
+        int salary,
+        bool isCanBuy)
     {
         this.idContainer = idContainer;
         this.id = id;
         this.type = type;
-        if (type.StartsWith("weapon"))
+        if (MoneyManager.instance.isCanBuy(salary) && isCanBuy)
         {
-            BuyWeapon();
-        }
-        else
-        {
-            SetKit();
+            if (type.StartsWith("weapon"))
+            {
+                BuyWeapon(salary);
+            }
+            else
+            {
+                SetKit(salary);
+            }
         }
         
     }
@@ -76,7 +84,7 @@ public class ChangeWeaponsManager : MonoBehaviour
     /// </summary>
     /// <param name="id">номер обвеса</param>
     /// <param name="type">тип опвеса</param>
-    private void SetKit()
+    private void SetKit(int salary)
     {
         switch (type)
         {
@@ -89,6 +97,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                 else if (shopManager.GetCanBuy(idContainer))
                 {
                     ARKit[id].SetActive(true);
+                    MoneyManager.instance.RemoveMoney(salary); //Дублирование кода
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
                 }
@@ -102,6 +111,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                 else if (shopManager.GetCanBuy(idContainer))
                 {
                     ShotgunKit[id].SetActive(true);
+                    MoneyManager.instance.RemoveMoney(salary);
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
                 }
@@ -115,6 +125,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                 else if (shopManager.GetCanBuy(idContainer))
                 {
                     SMGKit[id].SetActive(true);
+                    MoneyManager.instance.RemoveMoney(salary);
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
                 }            
