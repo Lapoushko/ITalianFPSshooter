@@ -568,13 +568,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f5b2d2e80db854f899ba4d443b0958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameGun: Shotgun
   attackPoint: {fileID: 479583504908459261}
   bullet: {fileID: 4148928866873295401, guid: 4ba3ab72c53933d4399bee36fb44ed9c, type: 3}
   muzzleFlash: {fileID: 8702176325064159413}
   shootForce: 50
   upwardForce: 0
   timeBetweenShooting: 1
-  spread: 3
+  spread: 2
   reloadTime: 1
   timeBetweenShots: 0
   maxAmmo: 30
@@ -592,6 +593,7 @@ MonoBehaviour:
   roughness: 5
   fadeInTime: 0.1
   fadeOutTime: 0.7
+  audioShootName: HeavyBlastShotgun
 --- !u!114 &2770760498883092874
 MonoBehaviour:
   m_ObjectHideFlags: 0

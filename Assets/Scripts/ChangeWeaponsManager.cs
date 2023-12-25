@@ -48,6 +48,7 @@ public class ChangeWeaponsManager : MonoBehaviour
         curWeaponType = type;
         MoneyManager.instance.RemoveMoney(salary);
         shopManager.OffObjectInContainer(idContainer);
+        AudioManager.instance.Play("Buy");
         Debug.Log("Оружие куплено!");
     }
 
@@ -92,6 +93,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                 if (!curWeaponType.Contains("AR"))
                 {
                     // TODO: показать, что оружие не подходит явно
+                    AudioManager.instance.Play("Can'tBuy");
                     Debug.Log("Для этого оружия не подходит");
                 }
                 else if (shopManager.GetCanBuy(idContainer))
@@ -100,11 +102,13 @@ public class ChangeWeaponsManager : MonoBehaviour
                     MoneyManager.instance.RemoveMoney(salary); //Дублирование кода
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
+                    AudioManager.instance.Play("Buy");
                 }
                 break;
             case "kit_SHOTGUN":
                 if (!curWeaponType.Contains("SHOTGUN"))
                 {
+                    AudioManager.instance.Play("Can'tBuy");
                     // TODO: показать, что оружие не подходит явно
                     Debug.Log("Для этого оружия не подходит");
                 }
@@ -114,12 +118,14 @@ public class ChangeWeaponsManager : MonoBehaviour
                     MoneyManager.instance.RemoveMoney(salary);
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
+                    AudioManager.instance.Play("Buy");
                 }
                 break;
             case "kit_SMG":
                 if (!curWeaponType.Contains("SMG"))
                 {
                     // TODO: показать, что оружие не подходит явно
+                    AudioManager.instance.Play("Can'tBuy");
                     Debug.Log("Для этого оружия не подходит");
                 }
                 else if (shopManager.GetCanBuy(idContainer))
@@ -128,6 +134,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                     MoneyManager.instance.RemoveMoney(salary);
                     shopManager.OffObjectInContainer(idContainer);
                     Debug.Log("KIT: " + id + " " + type);
+                    AudioManager.instance.Play("Buy");
                 }            
                 break;
         }

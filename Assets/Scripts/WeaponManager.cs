@@ -5,6 +5,8 @@ using DG.Tweening;
 public class WeaponManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] private string NameGun;
+
     public Transform attackPoint;
     [SerializeField] GameObject bullet;
     [SerializeField] ParticleSystem muzzleFlash;
@@ -38,6 +40,11 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] float roughness;
     [SerializeField] float fadeInTime;
     [SerializeField] float fadeOutTime;
+
+    [Header("Sound")]
+    [SerializeField] private string audioShootName;
+    private Sound sound;
+    private int idSound;
     private void Awake()
     {
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();;
@@ -58,6 +65,7 @@ public class WeaponManager : MonoBehaviour
             //
             containerKit.kits[i].SetActive(false);
         }
+        idSound = getSound();
     }
     void Update()
     {
@@ -135,7 +143,9 @@ public class WeaponManager : MonoBehaviour
 
         //transform.DOMoveZ(transform.position.z - 0.2f, timeBetweenShooting).SetEase(Ease.InOutSine).SetLoops(2, LoopType.Yoyo);
         gameObject.transform.DOShakePosition(timeBetweenShooting, 0.05f, 10, 90f, false, true, ShakeRandomnessMode.Harmonic).SetEase(Ease.InOutBounce);
-
+        AudioManager.instance.Play(audioShootName);
+        sound.pitch = Random.Range(0.8f, 1.4f);
+        AudioManager.instance.ChangePitch(idSound, sound.pitch);
         if (allowInvoke)
         {
             Invoke(nameof(ResetShot), timeBetweenShooting);
@@ -144,6 +154,7 @@ public class WeaponManager : MonoBehaviour
 
         if (ammoShot < ammoPerTap && ammo > 0)
         {
+            
             Invoke(nameof(Shoot), timeBetweenShots);
         }
     }
@@ -159,7 +170,7 @@ public class WeaponManager : MonoBehaviour
         shooting = false;
         reloading = true;
         textAmmo.enabled = false;
-
+        AudioManager.instance.Play("Reloading" + NameGun);
         Invoke(nameof(ReloadFinishing), reloadTime);
     }
 
@@ -172,5 +183,23 @@ public class WeaponManager : MonoBehaviour
         reloading = false;
         reloadImage.fillAmount = 0;
         textAmmo.enabled = true;
+    }
+
+    private int getSound()
+    {
+        Sound[] sounds = AudioManager.instance.sounds;
+        Sound sound;
+        int id = -1;
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            sound = sounds[i];
+            if (sound.name == audioShootName)
+            {
+                this.sound = sound;
+                id = i;
+                break;
+            }
+        }
+        return id;
     }
 }

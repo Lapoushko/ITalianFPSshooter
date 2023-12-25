@@ -36,6 +36,7 @@ public class Enemy : Actor
         if (health <= 0)
         {
             Destroy(gameObject);
+            MoneyManager.instance.AddMoney(1000);
         }
     }
 

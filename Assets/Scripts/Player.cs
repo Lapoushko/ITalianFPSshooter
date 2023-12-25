@@ -6,12 +6,13 @@ public class Player : Actor
 {
     UIManagerPlayer UIManager;
     [SerializeField] public int money;
-
+    GameController gameController;
 
     public override void Awake()
     {
         base.Awake();
         UIManager = FindFirstObjectByType<UIManagerPlayer>();
+        gameController = FindFirstObjectByType<GameController>();
     }
 
     private void Update()
@@ -32,6 +33,10 @@ public class Player : Actor
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+        if (health <= 0)
+        {
+            gameController.DeathPlayer();
+        }
 
         UIManager.durationTimer = 0f;
 

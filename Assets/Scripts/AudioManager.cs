@@ -23,10 +23,10 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         ActiveMusic = PlayerPrefs.GetInt("MusicActive");
 
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;           
+            s.source.clip = s.clip;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             s.source.volume = s.volume;
@@ -75,5 +75,10 @@ public class AudioManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ChangePitch(int id, float curPitch)
+    {
+        sounds[id].source.pitch = curPitch;
     }
 }

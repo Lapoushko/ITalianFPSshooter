@@ -612,6 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f5b2d2e80db854f899ba4d443b0958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameGun: AR
   attackPoint: {fileID: 4325317563016888555}
   bullet: {fileID: 4148928866873295401, guid: 4ba3ab72c53933d4399bee36fb44ed9c, type: 3}
   muzzleFlash: {fileID: 6674636786975135753}
@@ -636,6 +637,7 @@ MonoBehaviour:
   roughness: 2
   fadeInTime: 0.1
   fadeOutTime: 1
+  audioShootName: LightBlastAR
 --- !u!114 &1655781712346554916
 MonoBehaviour:
   m_ObjectHideFlags: 0
