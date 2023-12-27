@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
+/// <summary>
+/// Враг
+/// </summary>
 public class Enemy : Actor
 {
     public GameObject player;
@@ -17,12 +20,15 @@ public class Enemy : Actor
     [Header("Weapon Values")]
     public Transform gun;
     [Range(0.1f, 10f)] public float fireRate;
+    private NavMeshAgent agent;
+    public NavMeshAgent Agent { get => agent; }
 
     private void Start()
     {
         stateMachine = GetComponent<StateMachine>();
         stateMachine.Initialise();
         player = GameObject.FindGameObjectWithTag("Player");
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -36,7 +42,9 @@ public class Enemy : Actor
         if (health <= 0)
         {
             Destroy(gameObject);
-            MoneyManager.instance.AddMoney(1000);
+            MoneyManager.instance.AddMoney(150);
+            EnemyGenerate enemyGenerate = transform.GetComponentInParent<EnemyGenerate>();
+            enemyGenerate.DeadEnemy = true;
         }
     }
 

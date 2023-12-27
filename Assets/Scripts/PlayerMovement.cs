@@ -39,12 +39,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject speedParticles;
 
     [SerializeField] int idWeapon;
+
+    private GameController gameController;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         inputManager = GameObject.Find("Input Manager").GetComponent<InputManager>();
         changeWeaponsManager = GameObject.Find("ShopManagerWeaponAndKit").GetComponent<ChangeWeaponsManager>();
         cam = Camera.main;
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     private void Start()
@@ -85,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
     void Moving()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
         if (isGrounded && velocity.y < 0f)
         {
             velocity.y = -2f;

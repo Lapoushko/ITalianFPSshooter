@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject Player;
 
+    [Header("Lvls")]
+    [SerializeField] public GameObject[] lvls;
+
     private void Awake()
     {
         MenuPanel.SetActive(true);

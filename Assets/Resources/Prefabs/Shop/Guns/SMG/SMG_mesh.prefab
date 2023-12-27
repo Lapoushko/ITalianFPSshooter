@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2
   Type: weapon_SMG
-  Price: 50
+  Price: 175
 --- !u!1 &8251142141615168191 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6483620027947121641, guid: ea82520c3d646ee44a0a6d3f82302cbe,

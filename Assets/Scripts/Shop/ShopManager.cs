@@ -10,6 +10,7 @@ using Random = System.Random;
 /// </summary>
 public class ShopManager : MonoBehaviour
 {
+    public GameObject shop;
     /// <summary>
     /// Имя для currensyList
     /// </summary>
@@ -97,6 +98,7 @@ public class ShopManager : MonoBehaviour
 
     public void OffObjectInContainer(int id)
     {
+        shop = containers[id];
         containers[id].transform.GetChild(0).gameObject.SetActive(false);
         containers[id].GetComponent<ShopContainer>().IsCanBuy = false;
         containers[id].GetComponent<ShopContainer>().PriceText.text = "Куплено!";

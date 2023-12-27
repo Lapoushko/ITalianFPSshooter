@@ -30,9 +30,11 @@ public class AttackState : BaseState
                 Shoot();
             }
 
-            if (moveTimer > Random.Range(3, 7))
+            if (moveTimer > Random.Range(1, 5))
             {
                 //Движение босса
+                enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 10));
+
                 moveTimer = 0;
             }
         }
@@ -49,8 +51,6 @@ public class AttackState : BaseState
 
     public void Shoot()
     {
-        Debug.Log("Shoot");
-
         Transform gun = enemy.gun;
 
         GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gun.position, enemy.transform.rotation);

@@ -78,6 +78,7 @@ public class ChangeWeaponsManager : MonoBehaviour
                 SetKit(salary);
             }
         }
+
         
     }
     /// <summary>

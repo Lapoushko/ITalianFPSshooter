@@ -78,7 +78,7 @@ public class Look : MonoBehaviour
         }
         else inputManager.ActiveBuyButton(false);
 
-        if (Physics.SphereCast(ray, radiusTarget, out RaycastHit enemy, 75, layerEnemy))
+        if (Physics.SphereCast(ray, radiusTarget, out RaycastHit enemy, 19, layerEnemy))
         {
             isAiming = true;
             curMouseSensivity = mouseSensivity / 2;

@@ -27,7 +27,7 @@ public class MoneyManager : MonoBehaviour
     }
     void Start()
     {
-        Money = 0;
+        Money = 10000;
     }
 
     public void AddMoney(int salary) => Money += salary;
